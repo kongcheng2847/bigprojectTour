@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqj.bigproject.mapper.BpFileMapper">
+  <resultMap id="BaseResultMap" type="com.hqj.bigproject.pojo.BpFile">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="file_id" jdbcType="VARCHAR" property="fileId" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="file_size" jdbcType="INTEGER" property="fileSize" />
+    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="download_date" jdbcType="DATE" property="downloadDate" />
+    <result column="download_user" jdbcType="VARCHAR" property="downloadUser" />
+  </resultMap>
+</mapper>

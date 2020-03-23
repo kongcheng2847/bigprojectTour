@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqj.bigproject.mapper.BpUserMapper">
+  <resultMap id="BaseResultMap" type="com.hqj.bigproject.pojo.BpUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
+    <result column="id_crad" jdbcType="VARCHAR" property="idCrad" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="e_mail" jdbcType="VARCHAR" property="eMail" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+  </resultMap>
+
+  <select id="findAll" resultMap="BaseResultMap">
+        select * from bp_user
+  </select>
+</mapper>

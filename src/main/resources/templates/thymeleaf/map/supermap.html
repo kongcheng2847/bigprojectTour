@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>supermap</title>
+    <script type="text/javascript" th:src="@{/static/map/libs/SuperMap.Include.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/map.js}"></script>
+</head>
+<body onLoad="init()">
+    <div>
+        <input id="d1" type="button" class="btn" value="新增地物" onclick="activateAddFeature()"/>
+        <input id="d2" type="button" class="btn" value="选择地物" onclick="activateSelectedFeature()"/>
+        <input id="d3" type="button" class="btn" value="编辑地物" onclick="editselectedFeature()"/>
+        <input id="d4" type="button" class="btn" value="删除地物" onclick="deleteSelectedFeature()"/>
+        <input id="d5" type="button" class="btn" value="绘制铁路线" onclick="drawLineFeature()"/>
+    </div>
+    <div id="map"/>
+</body>
+</html>

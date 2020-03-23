@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>资源中心</title>
+    <link th:href="@{/static/bootstrap-4.1.3/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" th:src="@{/static/js/jquery-2.1.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/bootstrap-4.1.3/js/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/bootstrap-4.1.3/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/files.js}"></script>
+</head>
+<body style="background-color: gainsboro;">
+    <div class="container h-100">
+        <!--AJAX异步上传单个文件-->
+        <h3 class="text-center text-primary" style="margin-top: 2%;">资源中心</h3>
+        <div class="input-group" style="margin-top: 1%;">
+            <input type="file" class="form-control border border-info" id="selectfile" name="file" placeholder="请选择文件" style="padding-top: 3px;padding-left: 3px;">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary" onclick="importFile()"> 文件上传</button>
+            </div>
+        </div>
+        <!--多文件上传-->
+        <!--<form method="post" action="/file/importfiles" enctype="multipart/form-data">
+            <input id="file1" type="file" name="file"/><br>
+            <input id="file2" type="file" name="file"/><br>
+            <input id="file3" type="file" name="file"/><br>
+            <input id="importfile" type="submit" value="上传文件"/>
+        </form>-->
+        <div class="table-responsive h-75 border border-light">
+            <table class="table table-hover text-center">
+                <thead class="table-info">
+                    <!--<th>文件ID</th>-->
+                    <tr>
+                        <th></th>
+                        <th>文件名</th>
+                        <th>文件大小</th>
+                        <th>备注</th>
+                        <th>缩略图</th>
+                    </tr>
+                </thead>
+                <tbody th:each="bpfile:${bpfileList.list}" class="table-success">
+                    <tr class="alt">
+                        <!--<td>
+                            <input type="button" th:name="${bpfile.fileId}" class="deleteFile" value="删除" onclick="doDeleteFile(this)"/>
+                            <a th:href="@{'/file/dowloadFile?fileId='+ ${bpfile.fileId}}" target="_blank" th:text="${bpfile.fileId}"></a>
+                        </td>-->
+                        <td style="width: 1%;">
+                            <input type="button" th:name="${bpfile.fileId}" class="btn btn-outline-danger btn-sm" style="font-size: 10px;" value="删除" onclick="doDeleteFile(this)"/>
+                        </td>
+                        <td>
+                            <a th:href="@{'/file/dowloadFile?fileId='+ ${bpfile.fileId}}" target="_blank" th:text="${bpfile.fileName}"></a>
+                        </td>
+                        <td th:text="${bpfile.fileSize}/1024+' KB'" id="fileSize"></td>
+                        <td th:text="${bpfile.memo}"></td>
+                        <td>
+                            <a target="_blank" th:href="@{/static/uploadFiles/}+${bpfile.fileName}">
+                                <img th:src="@{/static/uploadFiles/}+${bpfile.fileName}"  alt="图片文本描述" width="50" height="30">
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul class="pagination pagination-sm float-right">
+                <li class="page-item disabled"><a class="page-link" th:text="'第'+${bpfileList.pageNum}+'/'+${bpfileList.pages}+'页'" href="#">首页</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">首页</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">下一页</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

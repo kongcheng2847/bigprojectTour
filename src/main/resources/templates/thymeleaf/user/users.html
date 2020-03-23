@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <script type="text/javascript" th:src="@{/static/js/jquery-2.1.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/index.js}"></script>
+    <style>
+        #viewUsers{
+            width: 80%;
+            margin: 0;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        h3{
+            text-align: center;
+            color: #4CAF50;
+        }
+        #user_table {
+            width:100%;
+            font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+        }
+        #user_table td, #user_table th
+        {
+            font-size:1em;
+            border:1px solid #98bf21;
+            padding:3px 7px 2px 7px;
+        }
+        #user_table th
+        {
+            font-size:1.1em;
+            text-align:center;
+            height:50px;
+            padding-top:5px;
+            padding-bottom:4px;
+            background-color:green;
+            color:#ffffff;
+        }
+        #user_table tr.alt td
+        {
+            color:#000000;
+            background-color:#EAF2D3;
+            text-align:center;
+            height:30px;
+            vertical-align:center;
+        }
+        .editusers{
+            background-color: darkgrey;
+            border-radius: 15px;
+            border: none;
+            font-size: small;
+            color: #dcd9d4;
+        }
+        #updateUser:hover {
+            background-color: #cca450;
+        }
+        #submitUser:hover {
+            background-color: #45a049;
+        }
+        #deleteUser:hover {
+            background-color: #a00e0d;
+        }
+    </style>
+</head>
+<body>
+    <div id="viewUsers">
+        <h3>用户数据</h3>
+        <table id="user_table">
+            <thead>
+                <!--<th>用户ID</th>-->
+                <th>用户名称</th>
+                <th>用户密码</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>出生日期</th>
+                <th>用户邮箱</th>
+                <th>所在地</th>
+                <th>操作</th>
+            </thead>
+            <tbody th:each="person:${bpuserList}">
+                <tr class="alt">
+                    <!--<td th:text="${person.id}"></td>-->
+                    <td th:text="${person.userName}"></td>
+                    <td th:text="${person.passWord}"></td>
+                    <td>男</td>
+                    <td>18</td>
+                    <td>2020-03-03</td>
+                    <td>chris_junjun@163.com</td>
+                    <td>成都</td>
+                    <td>
+                        <input class="editusers" type="button" id="updateUser" th:name="${person.id}" value="编辑"/>
+                        <input class="editusers" type="button" id="deleteUser" th:name="${person.id}" value="删除" onclick="doDeleteUser(this)"/>
+                        <input class="editusers" type="button" id="submitUser" th:name="${person.id}" value="提交"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
