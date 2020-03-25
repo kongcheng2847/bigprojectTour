@@ -27,8 +27,9 @@ public class BpUserController {
     private RedisOperator redisOperator;
 
     @RequestMapping(value = "/findAll")
-    public UserJSONResult findAll(){
-        return UserJSONResult.ok(bpUserService.findAll());
+    public UserJSONResult findAll(@RequestParam(defaultValue = "1")Integer pageNum,
+                                  @RequestParam(defaultValue = "3") Integer pageSize){
+        return UserJSONResult.ok(bpUserService.findAll(pageNum,pageSize));
     }
 
     /**
@@ -92,12 +93,12 @@ public class BpUserController {
      */
     @RequestMapping(value = "/deleteUser",method = RequestMethod.GET)
     @ResponseBody
-    public String doDeleteUser(String userId){
+    public String doDeleteUser(String userId) {
         String status = "";
         int i = bpUserService.deleteUser(userId);
-        if (i > 0){
+        if (i > 0) {
             status = "ok";
-        }else {
+        } else {
             status = "fail";
         }
         return status;
@@ -109,9 +110,10 @@ public class BpUserController {
      * @return
      */
     @RequestMapping(value = "/viewUsers")
-    public ModelAndView viewUsers(ModelMap modelMap){
+    public ModelAndView viewUsers(ModelMap modelMap,@RequestParam Integer pageNum) {
         LOG.info("查看用户列表...");
-        PageInfo<BpUser> pageInfo = bpUserService.findAll();
+        PageInfo<BpUser> pageInfo = bpUserService.findAll(pageNum, 3);
+
         modelMap.addAttribute("bpuserList", pageInfo);
         return new ModelAndView("thymeleaf/user/userlist");
     }

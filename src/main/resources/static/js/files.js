@@ -110,3 +110,45 @@ function dowloadFiles() {
     fileIds = fileIds.substr(0,fileIds.length-1);
     window.location.href = "/file/dowloadFiles?fileIds="+fileIds;
 }
+
+/**
+ * 首页
+ */
+function first() {
+
+}
+
+/**
+ * 上一页
+ */
+function previous(e){
+
+}
+
+/**
+ * 下一页
+ */
+function next(e){
+
+}
+
+/**
+ * 末页
+ */
+function lastNext(e){
+    var pageNum = 2;
+    $.ajax({
+        type: "GET",
+        url: "/file/viewFiles?pageNum="+pageNum,
+        async: false,
+        data: {
+            "pagaNum":pageNum
+        },
+        contentType: false,
+        processData: false,
+        //dataType: "json",
+        success: function (data) {
+            location.reload();
+        }
+    });
+}

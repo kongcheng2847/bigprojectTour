@@ -56,8 +56,8 @@ public class BpFileService {
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
-    public PageInfo<BpFile> queryFilsAll(BpFile bpFile){
-        PageHelper.startPage(1, 3);
+    public PageInfo<BpFile> queryFilsAll(Integer pageNum,Integer pageSize){
+        PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<BpFile>(bpFileMapper.selectAll());
     }
 }

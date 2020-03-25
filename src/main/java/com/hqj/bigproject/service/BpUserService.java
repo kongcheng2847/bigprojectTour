@@ -19,8 +19,8 @@ public class BpUserService {
     private BpUserMapper bpUserMapper;
 
     @Transactional(propagation = Propagation.SUPPORTS)
-    public PageInfo<BpUser> findAll(){
-        PageHelper.startPage(1, 2);
+    public PageInfo<BpUser> findAll(Integer pageNum,Integer pageSize){
+        PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<BpUser>(bpUserMapper.findAll());
     }
 

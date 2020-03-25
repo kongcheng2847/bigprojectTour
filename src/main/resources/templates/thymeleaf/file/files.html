@@ -61,12 +61,12 @@
                 </tbody>
             </table>
             <ul class="pagination pagination-sm float-right">
+                <li class="page-item disabled"><a class="page-link" href="#" onclick="first()"><span><<</span></a></li>
+                <li class="page-item"><a class="page-link" href="#" onclick="previous()"><span><</span></a></li>
                 <li class="page-item disabled"><a class="page-link" th:text="'第'+${bpfileList.pageNum}+'/'+${bpfileList.pages}+'页'" href="#">首页</a></li>
-                <li class="page-item disabled"><a class="page-link" href="#">首页</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">下一页</a></li>
+                <li class="page-item"><a class="page-link" href="#" onclick="next()"><span>></span></a></li>
+                <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                <li class="page-item"><a class="page-link" href="#" onclick="lastNext()"><span>>></span></a></li>
             </ul>
         </div>
     </div>
