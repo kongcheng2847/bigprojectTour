@@ -1,5 +1,5 @@
 $(function(){
-
+    $("#birthday").datepicker();
 });
 
 function doRegister() {

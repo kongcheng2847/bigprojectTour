@@ -137,18 +137,7 @@ function next(e){
  */
 function lastNext(e){
     var pageNum = 2;
-    $.ajax({
-        type: "GET",
-        url: "/file/viewFiles?pageNum="+pageNum,
-        async: false,
-        data: {
-            "pagaNum":pageNum
-        },
-        contentType: false,
-        processData: false,
-        //dataType: "json",
-        success: function (data) {
-            location.reload();
-        }
-    });
+    var url = "/file/viewFiles?pageNum="+pageNum;
+    $.get(url);
+    location.reload();
 }

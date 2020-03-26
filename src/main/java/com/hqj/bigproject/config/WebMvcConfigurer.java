@@ -18,7 +18,7 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
         registration.addPathPatterns("/**");
         //添加不拦截路径 登录  html静态资源  js静态资源
         String[] arr = {"/bigproject/login.do","/user/createuser","/user/checklogin","/**/*.html","/**/*.js","/**/*.css","/static/**"};
-        registration.excludePathPatterns(arr);
+        registration.excludePathPatterns("/bigproject/login.do","/user/createuser","/user/checklogin","/**/*.html","/**/*.js","/**/*.css","/static/**");
     }
 
     @Override

@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
+    <link th:href="@{/static/jquery-ui-1.12.1.custom/jquery-ui.min.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/static/bootstrap-4.1.3/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
     <script type="text/javascript" th:src="@{/static/js/jquery-2.1.4.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/bootstrap-4.1.3/js/bootstrap.bundle.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/bootstrap-4.1.3/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/login.js}"></script>
+    <script type="text/javascript" th:src="@{/static/jquery-ui-1.12.1.custom/jquery-ui.min.js}"></script>
     <style>
         .white_content {
             display: none;
@@ -92,6 +94,8 @@
                         <option value="成都">成都</option>
                         <option value="北京">北京</option>
                         <option value="上海">上海</option>
+                        <option value="深圳">深圳</option>
+                        <option value="广州">广州</option>
                     </select>
                 </div>
                 <input type="button" class="btn btn-primary btn-sm float-right" value="提交" style="width: 100px" onclick="createUser()">
