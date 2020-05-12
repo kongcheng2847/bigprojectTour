@@ -20,6 +20,16 @@ public class BigProjectTourController {
         return "thymeleaf/login/login";
     }
 
+    /**
+     * 注册
+     * @return
+     */
+    @RequestMapping("/logon.do")
+    public String logon(ModelMap modelMap){
+        modelMap.addAttribute("user", new BpUser());
+        return "thymeleaf/login/logon";
+    }
+
     @RequestMapping("/index.do")
     public String selectAll(ModelMap modelMap, HttpServletRequest request) {
         BpUser bpUser = (BpUser) request.getSession().getAttribute("loginUser");
@@ -27,6 +37,24 @@ public class BigProjectTourController {
         modelMap.addAttribute("describe", "万丈红尘三杯酒，千秋大业一壶茶！！");
         modelMap.addAttribute("bpUser", bpUser);
         return "thymeleaf/login/index";
+    }
+
+    /**
+     * 找回密码
+     * @return
+     */
+    @RequestMapping(value = "/rest/password")
+    public String resetPassWord(ModelMap modelMap){
+        modelMap.addAttribute("user", new BpUser());
+        return "thymeleaf/login/resetpassword";
+    }
+    /**
+     * 查看用户条约
+     * @return
+     */
+    @RequestMapping(value = "/viewtreaty")
+    public String viewTreaty(){
+        return "thymeleaf/login/treaty";
     }
 
     /**

@@ -246,4 +246,21 @@ public class BpFile {
     public void setDownloadUser(String downloadUser) {
         this.downloadUser = downloadUser == null ? null : downloadUser.trim();
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("BpFile{");
+        sb.append("fileId='").append(fileId).append('\'');
+        sb.append(", fileName='").append(fileName).append('\'');
+        sb.append(", filePath='").append(filePath).append('\'');
+        sb.append(", fileSize=").append(fileSize);
+        sb.append(", fileType='").append(fileType).append('\'');
+        sb.append(", memo='").append(memo).append('\'');
+        sb.append(", createDate=").append(createDate);
+        sb.append(", createUser='").append(createUser).append('\'');
+        sb.append(", downloadDate=").append(downloadDate);
+        sb.append(", downloadUser='").append(downloadUser).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

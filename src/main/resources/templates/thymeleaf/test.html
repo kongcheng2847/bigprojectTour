@@ -8,7 +8,7 @@
 <div>
     用户姓名：<input th:id="${user.userName}" th:name="${user.userName}" th:value="${user.userName}"/>
     <br/>
-    用户ID：<input th:value="${user.id}"/>
+    用户ID：<input th:value="${user.userId}"/>
     <br/>
     <!--用户生日：<input th:value="${user.birthday}"/>-->
     <br/>
@@ -21,7 +21,7 @@
 <div th:object="${user}">
     用户姓名：<input th:id="*{userName}" th:name="*{userName}" th:value="*{userName}"/>
     <br/>
-    用户ID：<input th:value="*{id}"/>
+    用户ID：<input th:value="*{userId}"/>
     <br/>
     <!--用户生日：<input th:value="*{#dates.format(birthday, 'yyyy-MM-dd hh:mm:ss')}"/>
     <br/>-->
@@ -41,9 +41,9 @@ URL:<br/>
 <br/>
 
 <br/>
-<form th:action="@{/th/postform}" th:object="${user}" method="post" th:method="post">
+<form th:action="@{/user/createuser}" th:object="${user}" method="post" th:method="post">
     <input type="text" th:field="*{userName}"/>
-    <input type="text" th:field="*{id}"/>
+    <input type="text" th:field="*{userId}"/>
     <input type="submit"/>
 </form>
 <br/>
@@ -85,8 +85,8 @@ URL:<br/>
 <br/>
 <div th:switch="${user.userName}">
     <p th:case="'ces'">ces</p>
-    <p th:case="#{roles.manager}">普通管理员</p>
-    <p th:case="#{roles.superadmin}">超级管理员</p>
+    <!--<p th:case="#{roles.manager}">普通管理员</p>
+    <p th:case="#{roles.superadmin}">超级管理员</p>-->
     <p th:case="*">其他用户</p>
 </div>
 <br/>

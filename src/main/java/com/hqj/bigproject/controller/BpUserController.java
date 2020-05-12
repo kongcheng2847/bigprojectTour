@@ -10,13 +10,14 @@ import com.hqj.bigproject.utils.UtilUUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
-@RestController
+@Controller
 @RequestMapping(value = "/user")
 public class BpUserController {
     private static final Logger LOG = LoggerFactory.getLogger(BpUserController.class);
@@ -66,7 +67,7 @@ public class BpUserController {
         LOG.info("SessionId="+httpSession.getId());
         redisOperator.del(httpSession.getId());
         httpSession.invalidate();
-        return "ok";
+        return "redirect:/bigproject/login.do";
     }
 
     /**
@@ -74,16 +75,77 @@ public class BpUserController {
      * @param bpUser
      * @return
      */
-    @RequestMapping(value = "/createuser", method = RequestMethod.POST)
-    @ResponseBody
-    public String createUser(@RequestBody BpUser bpUser) {
+    @PostMapping(value = "/createuser")
+    public String createUser(BpUser bpUser) {
+        System.out.printf("新增用户： %s",bpUser);
+        LOG.info("新增用户：%s",bpUser);
         bpUser.setUserId(UtilUUID.newShortUUID());
         int i = bpUserService.insertUser(bpUser);
-        if (i != 0) {
-            return "ok";
-        } else {
-            return "erro";
+        if(i > 0){
+            return "redirect:/bigproject/login.do";
+        }else{
+            return "redirect:/bigproject/logon.do";
         }
+    }
+
+    /**
+     * 验证用户注册时的用户名是否已存在
+     * @Parmam String
+     * @return
+     */
+    @PostMapping(value = "/validate/username")
+    @ResponseBody
+    public Boolean ValiDateUserName(@RequestParam String userName){
+        LOG.info(userName);
+        BpUser bpUser = new BpUser();
+        bpUser.setUserName(userName);
+        return bpUserService.selectBpUser(bpUser) == null;
+    }
+
+    /**
+     * 验证用户注册时邮箱是否已存在
+     * @Parmam String
+     * @return
+     */
+    @PostMapping(value = "/validate/email")
+    @ResponseBody
+    public Boolean ValiDateEmail(@RequestParam String eMail){
+        LOG.info(eMail);
+        BpUser bpUser = new BpUser();
+        bpUser.seteMail(eMail);
+        return bpUserService.selectBpUser(bpUser) == null;
+    }
+
+    /**
+     * 验证用户注册时身份证号是否已存在
+     * @Parmam String
+     * @return
+     */
+    @PostMapping(value = "/validate/idcard")
+    @ResponseBody
+    public Boolean ValiDateIdCard(@RequestParam String idCrad){
+        LOG.info(idCrad);
+        BpUser bpUser = new BpUser();
+        bpUser.setIdCrad(idCrad);
+        return bpUserService.selectBpUser(bpUser) == null;
+    }
+
+    /**
+     * 修改用户密码
+     * @return
+     */
+    @PostMapping(value = "/update/password")
+    public String updateBpUserPassWord(@RequestParam String userName,String idCrad,String passWord){
+        BpUser bpUser = new BpUser();
+        bpUser.setUserName(userName);
+        bpUser.setIdCrad(idCrad);
+        bpUser = bpUserService.selectBpUser(bpUser);
+        bpUser.setPassWord(passWord);
+        int i = bpUserService.updateUser(bpUser);
+        if (i>0){
+            return "redirect:/bigproject/login.do";
+        }
+        return "redirect:/bigproject/rest/password";
     }
 
     /**
@@ -110,9 +172,9 @@ public class BpUserController {
      * @return
      */
     @RequestMapping(value = "/viewUsers")
-    public ModelAndView viewUsers(ModelMap modelMap,@RequestParam Integer pageNum) {
+    public ModelAndView viewUsers(ModelMap modelMap) {
         LOG.info("查看用户列表...");
-        PageInfo<BpUser> pageInfo = bpUserService.findAll(pageNum, 3);
+        PageInfo<BpUser> pageInfo = bpUserService.findAll(1, 3);
 
         modelMap.addAttribute("bpuserList", pageInfo);
         return new ModelAndView("thymeleaf/user/userlist");

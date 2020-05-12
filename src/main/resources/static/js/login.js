@@ -1,16 +1,3 @@
-$(function(){
-    $("#birthday").datepicker();
-});
-
-function doRegister() {
-    $("#light").css("display","block");
-    $("#fade").css("display","block");
-}
-
-function closeWindow() {
-    $("#light").css("display","none");
-    $("#fade").css("display","none");
-}
 /**
  * 创建用户
  */

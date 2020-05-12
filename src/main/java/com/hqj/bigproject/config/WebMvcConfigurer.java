@@ -17,8 +17,21 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
         //所有路径都被拦截
         registration.addPathPatterns("/**");
         //添加不拦截路径 登录  html静态资源  js静态资源
-        String[] arr = {"/bigproject/login.do","/user/createuser","/user/checklogin","/**/*.html","/**/*.js","/**/*.css","/static/**"};
-        registration.excludePathPatterns("/bigproject/login.do","/user/createuser","/user/checklogin","/**/*.html","/**/*.js","/**/*.css","/static/**");
+        registration.excludePathPatterns(
+                "/bigproject/login.do",
+                "/bigproject/logon.do",
+                "/bigproject/viewtreaty",
+                "/bigproject/rest/password",
+                "/user/update/password",
+                "/user/createuser",
+                "/user/validate/username",
+                "/user/validate/email",
+                "/user/validate/idcard",
+                "/user/checklogin",
+                "/**/*.html",
+                "/**/*.js",
+                "/**/*.css",
+                "/static/**");
     }
 
     @Override
@@ -27,6 +40,6 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
         //第一个方法设置访问路径前缀，第二个方法设置资源路径
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
-        //super.addResourceHandlers(registry);
+        super.addResourceHandlers(registry);
     }
 }

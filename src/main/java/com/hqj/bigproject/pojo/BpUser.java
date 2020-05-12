@@ -1,5 +1,7 @@
 package com.hqj.bigproject.pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -50,6 +52,7 @@ public class BpUser {
     /**
      * 生日
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     /**
@@ -241,5 +244,22 @@ public class BpUser {
      */
     public void setCountry(String country) {
         this.country = country == null ? null : country.trim();
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("BpUser{");
+        sb.append("userId='").append(userId).append('\'');
+        sb.append(", userName='").append(userName).append('\'');
+        sb.append(", passWord='").append(passWord).append('\'');
+        sb.append(", idCrad='").append(idCrad).append('\'');
+        sb.append(", age=").append(age);
+        sb.append(", address='").append(address).append('\'');
+        sb.append(", sex='").append(sex).append('\'');
+        sb.append(", birthday=").append(birthday);
+        sb.append(", eMail='").append(eMail).append('\'');
+        sb.append(", country='").append(country).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -18,22 +18,53 @@ public class BpUserService {
     @Resource
     private BpUserMapper bpUserMapper;
 
+    /**
+     * 返回用户数据
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @Transactional(propagation = Propagation.SUPPORTS)
     public PageInfo<BpUser> findAll(Integer pageNum,Integer pageSize){
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<BpUser>(bpUserMapper.findAll());
     }
 
+    /**
+     * 新增用户
+     * @param bpUser
+     * @return
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     public int insertUser(BpUser bpUser){
-        return bpUserMapper.insert(bpUser);
+        return bpUserMapper.insertSelective(bpUser);
     }
 
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     public int deleteUser(String userId) {
         return bpUserMapper.deleteByPrimaryKey(userId);
     }
 
+    /**
+     * 修改用户密码
+     * @param bpUser
+     * @return
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int updateUser(BpUser bpUser){
+        return bpUserMapper.updateByPrimaryKeySelective(bpUser);
+    }
+
+    /**
+     * 查询单个用户
+     * @param bpUser
+     * @return
+     */
     @Transactional(propagation = Propagation.SUPPORTS)
     public BpUser selectBpUser(BpUser bpUser){
         return bpUserMapper.selectOne(bpUser);

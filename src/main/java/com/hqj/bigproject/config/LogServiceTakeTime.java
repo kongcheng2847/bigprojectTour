@@ -2,13 +2,14 @@ package com.hqj.bigproject.config;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Aspect
 @Component
@@ -47,6 +48,19 @@ public class LogServiceTakeTime {
 
     @Before("performance()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
+        //记录Http请求
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = requestAttributes.getRequest();
+        //url
+        LOG.info("url={}",request.getRequestURL());
+        //ip
+        LOG.info("ip={}",request.getRemoteAddr());
+        //method
+        LOG.info("method={}",request.getMethod());
+        //class function
+        LOG.info("class_function={}",joinPoint.getSignature().getDeclaringTypeName()+"."+joinPoint.getSignature().getName());
+        //params
+        LOG.info("params={}",joinPoint.getArgs());
         // 接收到请求，记录请求内容
         LOG.info("doBefore");
     }
@@ -56,4 +70,8 @@ public class LogServiceTakeTime {
 //        // 处理完请求，返回内容
 //    	log.info("doAfterReturning");
 //    }
+    /*@AfterReturning(returning = "object",pointcut = "performance()")
+    public void doAfterReturning(Object object){
+        LOG.info("response={}",object.toString());
+    }*/
 }

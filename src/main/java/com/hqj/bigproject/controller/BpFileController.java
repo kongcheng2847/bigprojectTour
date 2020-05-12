@@ -36,11 +36,8 @@ public class BpFileController {
      * @return
      */
     @RequestMapping(value = "/viewFiles")
-    public String queryFiles(ModelMap modelMap,@RequestParam Integer pageNum){
-        if (pageNum == null || "".equals(pageNum)) {
-            pageNum = 1;
-        }
-        PageInfo<BpFile> pageInfo = bpFileService.queryFilsAll(pageNum,3);
+    public String queryFiles(ModelMap modelMap){
+        PageInfo<BpFile> pageInfo = bpFileService.queryFilsAll(1,3);
         modelMap.addAttribute("bpfileList", pageInfo);
         return "thymeleaf/file/files";
     }
